@@ -4,7 +4,7 @@ import Faq from '../components/Faq.astro';
 import { site, facts as f, money as m, year } from '../data/site';
 
 const title = `LA Fitness Membership Cost: Prices, Plans & Fees (${site.updated})`;
-const description = `LA Fitness membership costs about ${m(f.low)}–${m(f.high)} a month, plus an initiation fee of up to ${m(f.initiationHigh)} and an annual fee of about ${m(f.annualLow)}–${m(f.annualHigh)}. Independent guide to prices, plans and policies.`;
+const description = `LA Fitness membership costs about ${m(f.low)}–${m(f.high)} a month, plus an initiation fee of up to ${m(f.initiationHigh)} and an annual fee of about ${m(f.annualLow)}–${m(f.annualHigh)}. Guide to prices, plans and policies.`;
 
 const toc = [
   ['what-you-get', 'What LA Fitness is and what you get'],
@@ -35,7 +35,7 @@ const org = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.n
 <Base title={title} description={description}>
   <section class="hero">
     <div class="wrap">
-      <span class="eyebrow">Independent guide · Reviewed {site.updated}</span>
+      <span class="eyebrow">Reviewed {site.updated}</span>
       <h1>LA Fitness Membership Cost and Pricing Guide</h1>
       <p class="lead">
         An LA Fitness membership costs roughly {m(f.low)} to {m(f.high)} a month, depending on the club and whether you pick a single-club or multi-club plan. Most memberships also carry an initiation fee and an annual fee. This guide shows the reported prices, what each plan includes, and the rules worth knowing before you sign.
