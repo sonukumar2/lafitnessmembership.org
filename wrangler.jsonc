@@ -1,0 +1,14 @@
+{
+  // Static site on Cloudflare Workers: `astro build` writes ./dist, the Worker serves it.
+  "name": "lafitnessmembership-org",
+  "compatibility_date": "2026-11-01",
+  "routes": [
+    { "pattern": "lafitnessmembership.org", "custom_domain": true },
+    { "pattern": "www.lafitnessmembership.org", "custom_domain": true }
+  ],
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "force-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

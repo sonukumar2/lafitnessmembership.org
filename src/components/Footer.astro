@@ -1,0 +1,37 @@
+---
+import { site, legalNav } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h2>{site.name}</h2>
+        <p>Plain-English explanations of LA Fitness membership prices, plans, fees and rules, checked against the company's published information.</p>
+      </div>
+      <div>
+        <h2>On the homepage</h2>
+        <ul>
+          <li><a href="/#membership-cost">Membership cost</a></li>
+          <li><a href="/#plans">Plans compared</a></li>
+          <li><a href="/#yearly-cost">Yearly cost</a></li>
+          <li><a href="/#rules">Contract and cancellation rules</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Site</h2>
+        <ul>{legalNav.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p class="disclaimer">
+        <strong>Disclaimer:</strong> {site.domain} is an independent information site. It is not affiliated with,
+        endorsed by, or operated by Fitness International, LLC (LA Fitness). You cannot join, pay for, or cancel a
+        membership here. Prices shown are reported ranges; dues, fees and policies vary by club and can change, so confirm
+        the details with your club or on <a href={site.official} rel="nofollow noopener">lafitness.com</a> before you decide.
+        LA Fitness® is a trademark of its owner and is used here only to describe the service.
+      </p>
+      <p class="copyright">© {new Date().getFullYear()} {site.domain}. Independent guide, last reviewed {site.updated}.</p>
+    </div>
+  </div>
+</footer>

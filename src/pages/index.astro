@@ -1,0 +1,205 @@
+---
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import { site, facts as f, money as m, year } from '../data/site';
+
+const title = `LA Fitness Membership Cost: Prices, Plans & Fees (${site.updated})`;
+const description = `LA Fitness membership costs about ${m(f.low)}–${m(f.high)} a month, plus an initiation fee of up to ${m(f.initiationHigh)} and an annual fee of about ${m(f.annualLow)}–${m(f.annualHigh)}. Independent guide to prices, plans and policies.`;
+
+const toc = [
+  ['what-you-get', 'What LA Fitness is and what you get'],
+  ['membership-cost', 'Monthly cost and membership fees'],
+  ['plans', 'Membership plans compared'],
+  ['yearly-cost', 'Yearly membership cost'],
+  ['price-factors', 'Things that affect the price'],
+  ['rules', 'Cancellation, freeze and guest rules'],
+  ['reading-ads', 'How to read an LA Fitness price offer'],
+  ['save', 'How to save money'],
+  ['faq', 'Frequently asked questions'],
+  ['final', 'Final thoughts'],
+];
+
+const faqs = [
+  { q: 'How much does an LA Fitness membership cost per month?', a: `Reported dues run from about ${m(f.low)} to ${m(f.high)} a month. A single-club membership is typically ${m(f.singleLow)} to ${m(f.singleHigh)}, and a multi-club membership ${m(f.multiLow)} to ${m(f.multiHigh)}. The exact rate depends on your club and the current offer.` },
+  { q: 'Does LA Fitness charge an initiation fee?', a: `Usually, yes. Reported initiation fees run from ${m(f.initiationLow)} during promotions to about ${m(f.initiationHigh)}, and the fee is often reduced or waived.` },
+  { q: 'Is there an LA Fitness annual fee?', a: `Most memberships carry an annual fee, commonly reported at ${m(f.annualLow)} to ${m(f.annualHigh)} and higher at some clubs. Check the date it will be billed in your agreement.` },
+  { q: 'How much is LA Fitness for a full year?', a: `At reported prices, roughly ${m(year(f.singleLow, f.annualLow))} for a single club and ${m(year(f.multiHigh, f.annualHigh))} for a top-end multi-club plan, before the initiation fee and tax.` },
+  { q: 'Can I use any LA Fitness club?', a: 'Only with a multi-club membership. A single-club membership covers your home club. Club Studio locations are a separate, higher-priced brand and are not covered by standard LA Fitness memberships.' },
+  { q: 'How do I cancel LA Fitness?', a: 'LA Fitness has historically required cancellation in person at a club or by a written cancellation form sent by mail. Some members report an online option in their account. Send your request well before your next billing date and keep proof that it was received.' },
+  { q: 'Can I freeze my LA Fitness membership?', a: 'Many clubs allow a freeze for a fee. Rules and fees vary by club, so ask at the front desk before you sign.' },
+  { q: 'Does LA Fitness offer a free guest pass?', a: 'LA Fitness has offered free short-term guest passes to local residents through its website. Some multi-club memberships also include guest privileges, depending on the agreement.' },
+];
+
+const org = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: site.url };
+---
+<Base title={title} description={description}>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">Independent guide · Reviewed {site.updated}</span>
+      <h1>LA Fitness Membership Cost and Pricing Guide</h1>
+      <p class="lead">
+        An LA Fitness membership costs roughly {m(f.low)} to {m(f.high)} a month, depending on the club and whether you pick a single-club or multi-club plan. Most memberships also carry an initiation fee and an annual fee. This guide shows the reported prices, what each plan includes, and the rules worth knowing before you sign.
+      </p>
+      <p>
+        <a class="btn" href="#membership-cost">Check LA Fitness Membership Cost</a>
+        <a class="btn ghost" href="#plans">Compare plans</a>
+      </p>
+      <div class="stats">
+        <div class="stat"><b>{m(f.singleLow)}+</b><span>Single club, per month</span></div>
+        <div class="stat"><b>{m(f.multiLow)}+</b><span>Multi-club, per month</span></div>
+        <div class="stat"><b>{m(f.annualLow)}–{m(f.annualHigh)}</b><span>Typical annual fee</span></div>
+        <div class="stat"><b>{f.clubs}</b><span>Clubs in {f.states} states ({f.statsAsOf})</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap layout single" style="grid-template-columns:minmax(0,880px);justify-content:center">
+    <article class="content">
+      <nav class="box toc" aria-label="Table of contents">
+        <h2>Table of contents</h2>
+        <ol>{toc.map(([id, label]) => <li><a href={`#${id}`}>{label}</a></li>)}</ol>
+      </nav>
+
+      <h2 id="what-you-get">What Is LA Fitness and What You Get</h2>
+      <p>
+        LA Fitness is a mid-priced gym chain founded in 1984 and run by Fitness International, LLC, based in Irvine, California. It operated about {f.clubs} LA Fitness clubs across {f.states} US states as of {f.statsAsOf}. The same company runs the premium Club Studio brand, bought the XSport Fitness chain in 2024, and retired the Esporta Fitness name in 2025.
+      </p>
+      <p>
+        A typical club has a large weights and cardio floor, group fitness classes, and basketball and racquetball courts. Many locations add a lap pool, sauna, steam room or spa, and a Kids Klub childcare room for an extra charge. Amenities vary a lot from club to club, so check the listing for the club you plan to use.
+      </p>
+
+      <div class="plans three">
+        <div class="plan">
+          <h3>Single Club</h3>
+          <p class="price">{m(f.singleLow)}<small> /month from</small></p>
+          <p class="sub">Reported {m(f.singleLow)}–{m(f.singleHigh)} · plus initiation and annual fee</p>
+          <ul>
+            <li>Unlimited use of one home club</li>
+            <li>Group fitness classes</li>
+            <li>Courts, pool and sauna where available</li>
+          </ul>
+        </div>
+        <div class="plan featured">
+          <span class="badge">Most flexible</span>
+          <h3>Multi-Club</h3>
+          <p class="price">{m(f.multiLow)}<small> /month from</small></p>
+          <p class="sub">Reported {m(f.multiLow)}–{m(f.multiHigh)} · plus initiation and annual fee</p>
+          <ul>
+            <li>Use of LA Fitness clubs nationwide</li>
+            <li>Guest privileges on some agreements</li>
+            <li>Everything in Single Club</li>
+          </ul>
+        </div>
+        <div class="plan">
+          <h3>Club Studio</h3>
+          <p class="price">Higher<small> /month</small></p>
+          <p class="sub">Separate premium brand · priced by location</p>
+          <ul>
+            <li>Upscale clubs with studio-style classes</li>
+            <li>Recovery and spa amenities</li>
+            <li>Not included in LA Fitness plans</li>
+          </ul>
+        </div>
+      </div>
+      <p class="updated">Reported price ranges. LA Fitness sets prices by club and offer, and plan names vary by location.</p>
+
+      <h2 id="membership-cost">Typical Monthly Cost and Membership Fees</h2>
+      <p>LA Fitness rarely shows one national price. You see the offer for a specific club, usually online or at the front desk. These are the charges to expect.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Charge</th><th>Amount</th><th>When</th></tr></thead>
+        <tbody>
+          <tr><th>Monthly dues</th><td>About {m(f.low)} to {m(f.high)}, by club and plan</td><td>Every month</td></tr>
+          <tr><th>Initiation fee</th><td>{m(f.initiationLow)} on promotion to about {m(f.initiationHigh)}</td><td>Once, when you join</td></tr>
+          <tr><th>Annual fee</th><td>Commonly {m(f.annualLow)} to {m(f.annualHigh)}, higher at some clubs</td><td>Once a year</td></tr>
+          <tr><th>Kids Klub</th><td>Extra monthly charge where offered</td><td>Only if you add it</td></tr>
+          <tr><th>Taxes</th><td>Varies by state and city</td><td>Added where applicable</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Putting it together</h3>
+      <ul>
+        <li><strong>Single club at {m(f.singleLow)}:</strong> {m(f.singleLow)} × 12 + {m(f.annualLow)} annual fee + {m(f.initiationHigh)} initiation = <strong>{m(year(f.singleLow, f.annualLow, f.initiationHigh))}</strong> in year one, then {m(year(f.singleLow, f.annualLow))} a year.</li>
+        <li><strong>Multi-club at {m(f.multiHigh)}:</strong> {m(f.multiHigh)} × 12 + {m(f.annualHigh)} annual fee + {m(f.initiationLow)} initiation = <strong>{m(year(f.multiHigh, f.annualHigh))}</strong> in year one.</li>
+      </ul>
+
+      <h2 id="plans">Membership Plans and What Those Prices Mean</h2>
+      <h3>Single club: one gym, lowest price</h3>
+      <p>You train at one home club. It suits people who live and work near the same location and do not travel much.</p>
+      <h3>Multi-club: every LA Fitness club</h3>
+      <p>Lets you use LA Fitness clubs across the country, which helps if you split your week between home and work or travel. Some multi-club agreements include guest privileges.</p>
+      <h3>Paid-in-full and promotional offers</h3>
+      <p>Some clubs sell memberships paid up front for a term, or run offers with a reduced initiation fee. Read the terms for what happens when the term ends.</p>
+      <h3>Adding family members</h3>
+      <p>Clubs often let you add a partner or family member to an existing membership at a lower monthly rate. Ask the club for the add-on price.</p>
+      <h3>Club Studio</h3>
+      <p>Club Studio is the company's premium brand, with more upscale clubs and amenities. It is sold separately and costs more than an LA Fitness membership.</p>
+
+      <h2 id="yearly-cost">Yearly Membership Cost</h2>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Plan</th><th>Dues × 12</th><th>Annual fee</th><th>Per year</th></tr></thead>
+        <tbody>
+          <tr><th>Low end ({m(f.low)})</th><td>{m(year(f.low))}</td><td>{m(f.annualLow)}</td><td><strong>{m(year(f.low, f.annualLow))}</strong></td></tr>
+          <tr><th>Single club ({m(f.singleHigh)})</th><td>{m(year(f.singleHigh))}</td><td>{m(f.annualLow)}</td><td><strong>{m(year(f.singleHigh, f.annualLow))}</strong></td></tr>
+          <tr><th>Multi-club ({m(f.multiHigh)})</th><td>{m(year(f.multiHigh))}</td><td>{m(f.annualHigh)}</td><td><strong>{m(year(f.multiHigh, f.annualHigh))}</strong></td></tr>
+        </tbody>
+      </table></div>
+      <p>Before initiation fee and tax.</p>
+
+      <h2 id="price-factors">Things That Affect the Price</h2>
+      <h3>Location</h3>
+      <p>Clubs in big cities and newer buildings tend to cost more.</p>
+      <h3>Access level</h3>
+      <p>Multi-club costs more than single club.</p>
+      <h3>Initiation fee</h3>
+      <p>The largest one-off cost, from waived to about {m(f.initiationHigh)}.</p>
+      <h3>Annual fee</h3>
+      <p>An extra yearly charge that the monthly price does not show.</p>
+      <h3>Promotions</h3>
+      <p>Offers change often and usually have an end date.</p>
+      <h3>Add-ons</h3>
+      <p>Kids Klub, family add-ons and personal training all change the total.</p>
+
+      <h2 id="rules">Cancellation, Freeze and Guest Rules</h2>
+      <ul>
+        <li><strong>Cancelling:</strong> LA Fitness has historically required you to cancel in person at a club or by mailing a written cancellation form. Some members report an online option in their account. Keep a copy and proof of delivery.</li>
+        <li><strong>Timing:</strong> send your request well before your next billing date, or you may be charged for another month.</li>
+        <li><strong>Regulator action:</strong> in August 2025 the US Federal Trade Commission sued LA Fitness, alleging it made cancelling monthly memberships unreasonably difficult. Check whether the process has changed before you rely on old advice.</li>
+        <li><strong>Freezing:</strong> many clubs allow a freeze for a fee. Ask your club for its rules.</li>
+        <li><strong>Guests:</strong> free short-term guest passes have been offered to local residents online, and some multi-club agreements include guest privileges.</li>
+      </ul>
+
+      <h2 id="reading-ads">How to Read an LA Fitness Price Offer</h2>
+      <ul>
+        <li>Check whether the price is for a single club or multi-club.</li>
+        <li>Look for the initiation fee and whether it is reduced or waived.</li>
+        <li>Find the annual fee amount and the date it will be charged.</li>
+        <li>Note when the offer ends and whether the monthly rate can change.</li>
+        <li>Ask how to cancel and how much notice is needed before you sign.</li>
+      </ul>
+
+      <h2 id="save">How to Save Money and Get Better Value</h2>
+      <ul>
+        <li>Join during a promotion with a reduced or waived initiation fee.</li>
+        <li>Compare first-year totals, not just monthly prices.</li>
+        <li>Choose single club unless you really use more than one location.</li>
+        <li>Ask about family add-on rates instead of buying two full memberships.</li>
+        <li>Try a club with a free guest pass before you join.</li>
+        <li>Check whether your health insurance or employer pays towards gym dues.</li>
+        <li>Put your billing date and annual fee date in your calendar.</li>
+      </ul>
+
+      <Faq items={faqs} />
+
+      <h2 id="final">Final Thoughts</h2>
+      <ul>
+        <li>Budget about {m(year(f.singleLow, f.annualLow))} to {m(year(f.multiHigh, f.annualHigh))} a year, plus any initiation fee and tax.</li>
+        <li>Single club is the cheapest option if you train in one place.</li>
+        <li>Know your annual fee date and how to cancel before you sign.</li>
+        <li>Your club's offer and agreement are the final word on price and terms.</li>
+      </ul>
+      <p class="note">
+        This is an independent guide and is not affiliated with LA Fitness. Prices are reported ranges, vary by club and may change. Confirm current details on lafitness.com or with your local club.
+      </p>
+    </article>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(org)} />
+</Base>

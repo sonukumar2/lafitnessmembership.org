@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import Faq from '../components/Faq.astro';
+import { published, guides } from '../data/pages';
+import { site } from '../data/site';
+
+export function getStaticPaths() {
+  return published.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+const { page } = Astro.props;
+const related = guides.filter((g) => g.slug !== page.slug).slice(0, 6);
+const article = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: page.h1,
+  description: page.description,
+  dateModified: site.updatedISO,
+  author: { '@type': 'Organization', name: site.name },
+  publisher: { '@type': 'Organization', name: site.name },
+  mainEntityOfPage: `${site.url}/${page.slug}/`,
+};
+---
+<Base title={page.title} description={page.description}>
+  <section class="hero page-hero">
+    <div class="wrap">
+      <p class="crumbs"><a href="/">Home</a> / {page.category}</p>
+      <h1>{page.h1}</h1>
+      <p class="lead">{page.intro}</p>
+      <p class="updated">Last reviewed {site.updated} · Independent guide, not affiliated with LA Fitness</p>
+      {page.keyFacts && (
+        <div class="stats facts">
+          {page.keyFacts.map(([label, value]) => (
+            <div class="stat"><b>{value}</b><span>{label}</span></div>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <div class={`wrap layout ${page.legal ? 'single' : ''}`}>
+    <article class="content">
+      {!page.legal && (
+        <nav class="box toc" aria-label="On this page">
+          <h2>On this page</h2>
+          <ol>
+            {page.sections.map((s) => <li><a href={`#${s.id}`}>{s.h2}</a></li>)}
+            {page.faqs && <li><a href="#faq">Frequently asked questions</a></li>}
+          </ol>
+        </nav>
+      )}
+      {page.sections.map((s) => (
+        <section>
+          <h2 id={s.id}>{s.h2}</h2>
+          <Fragment set:html={s.html} />
+        </section>
+      ))}
+      {page.faqs && <Faq items={page.faqs} />}
+      {!page.legal && (
+        <p class="note">
+          Prices are reported ranges and policies vary by club and can change. Confirm the details for your location on
+          <a href={site.official} rel="nofollow noopener">lafitness.com</a> or with your home club.
+        </p>
+      )}
+    </article>
+
+    {!page.legal && (
+      <aside class="aside">
+        <div class="box">
+          <h2>More guides</h2>
+          <ul>{related.map((r) => <li><a href={`/${r.slug}/`}>{r.nav}</a></li>)}</ul>
+        </div>
+        <div class="box">
+          <h2>Official source</h2>
+          <p style="font-size:.92rem;margin:0">To join, manage or cancel a membership, go to
+            <a href={site.official} rel="nofollow noopener">lafitness.com</a> or your home club. This site cannot access accounts.</p>
+        </div>
+      </aside>
+    )}
+  </div>
+  {!page.legal && <script type="application/ld+json" set:html={JSON.stringify(article)} />}
+</Base>
