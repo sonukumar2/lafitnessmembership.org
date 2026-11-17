@@ -5,7 +5,6 @@ const path = Astro.url.pathname;
 <a class="skip" href="#content">Skip to content</a>
 <div class="utility">
   <div class="wrap">
-    <span class="tag">Independent guide. Not affiliated with LA Fitness.</span>
     <span class="links">
       {legalNav.map((l) => <a href={l.href}>{l.label}</a>)}
     </span>
@@ -15,7 +14,7 @@ const path = Astro.url.pathname;
   <div class="wrap">
     <a class="brand" href="/" aria-label={site.name + ' home'}>
       <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0f1f2e"/><circle cx="32" cy="34" r="13" fill="none" stroke="#2dd4bf" stroke-width="5"/><rect x="10" y="32" width="44" height="5" rx="2.5" fill="#2dd4bf"/></svg>
-      <span>LA Fitness Membership<small>Independent pricing guide</small></span>
+      <span>LA Fitness Membership</span>
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
