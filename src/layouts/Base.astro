@@ -26,6 +26,12 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
     <meta property="og:url" content={canonical} />
     <meta name="twitter:card" content="summary" />
     <link rel="sitemap" href="/sitemap.xml" />
+    <script is:inline async src="https://www.googletagmanager.com/gtm.js?id=GTM-WZ6257Q4"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    </script>
   </head>
   <body>
     <Header />
